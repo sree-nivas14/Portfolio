@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sree Nivas J — Senior Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy: #050d1a;
+  --navy2: #0a1628;
+  --teal: #00d4aa;
+  --teal2: #00b890;
+  --teal-glow: rgba(0,212,170,0.15);
+  --teal-glow2: rgba(0,212,170,0.08);
+  --white: #f0f6ff;
+  --gray: #8899bb;
+  --gray2: #4a5a7a;
+  --card: rgba(255,255,255,0.03);
+  --card-border: rgba(255,255,255,0.07);
+  --pill-bg: rgba(255,255,255,0.05);
+  --pill-border: rgba(255,255,255,0.08);
+  --nav-bg: rgba(5,13,26,0.85);
+  --nav-bg-scrolled: rgba(5,13,26,0.97);
+  --noise-opacity: 0.4;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+body.light-theme {
+  --navy: #f7f7f4;
+  --navy2: #ffffff;
+  --teal: #009980;
+  --teal2: #007a66;
+  --teal-glow: rgba(0,153,128,0.12);
+  --teal-glow2: rgba(0,153,128,0.06);
+  --white: #12181f;
+  --gray: #5b6270;
+  --gray2: #b8bcc4;
+  --card: rgba(15,23,35,0.03);
+  --card-border: rgba(15,23,35,0.1);
+  --pill-bg: rgba(15,23,35,0.04);
+  --pill-border: rgba(15,23,35,0.09);
+  --nav-bg: rgba(247,247,244,0.85);
+  --nav-bg-scrolled: rgba(247,247,244,0.97);
+  --noise-opacity: 0.12;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--navy); color: var(--white); overflow-x: hidden; line-height: 1.6; transition: background 0.3s ease, color 0.3s ease; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--teal2); border-radius: 2px; }
+body::before {
+  content:''; position:fixed; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:0; opacity: var(--noise-opacity); transition: opacity 0.3s ease;
+}
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
+  background: var(--nav-bg); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--card-border); transition: background 0.3s ease, border-color 0.3s ease;
+}
+nav.scrolled { background: var(--nav-bg-scrolled); }
+.nav-logo { font-family: var(--mono); font-size: 1rem; color: var(--teal); letter-spacing: 0.05em; }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { color: var(--gray); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; position: relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background: var(--teal); transition: width 0.3s; }
+.nav-links a:hover { color: var(--teal); }
+.nav-links a:hover::after { width: 100%; }
+#theme-toggle {
+  font-family: var(--mono); font-size: 0.72rem; color: var(--gray); background: transparent; cursor: pointer;
+  border: 1px solid var(--card-border); border-radius: 20px; padding: 0.4rem 0.9rem;
+  display: inline-flex; align-items: center; gap: 0.4rem; transition: all 0.2s;
+}
+#theme-toggle:hover { border-color: var(--teal); color: var(--teal); }
+#hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 6rem 2rem 4rem; }
+.hero-bg-circles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.hero-bg-circles span { position: absolute; border-radius: 50%; background: radial-gradient(circle, var(--teal-glow) 0%, transparent 70%); animation: pulse-circle 6s ease-in-out infinite; }
+.hero-bg-circles span:nth-child(1) { width:600px; height:600px; top:-100px; right:-100px; animation-delay:0s; }
+.hero-bg-circles span:nth-child(2) { width:400px; height:400px; bottom:0; left:-80px; animation-delay:2s; }
+.hero-bg-circles span:nth-child(3) { width:300px; height:300px; top:40%; left:40%; animation-delay:4s; }
+@keyframes pulse-circle { 0%,100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.15); opacity: 1; } }
+.hero-content { position: relative; z-index:1; max-width: 800px; }
+.hero-eyebrow { font-family: var(--mono); font-size: 0.8rem; color: var(--teal); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fade-up 0.6s 0.2s forwards; }
+.hero-name { font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; opacity: 0; animation: fade-up 0.7s 0.4s forwards; }
+.hero-name .accent { color: var(--teal); }
+.hero-title { font-size: clamp(1rem, 2.5vw, 1.35rem); color: var(--gray); font-weight: 400; margin: 1.2rem 0; opacity: 0; animation: fade-up 0.7s 0.6s forwards; }
+.cursor { display: inline-block; width: 2px; height: 1em; background: var(--teal); margin-left: 2px; vertical-align: middle; animation: blink 0.9s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.hero-desc { font-size: 1rem; color: var(--gray); max-width: 560px; line-height: 1.75; margin-bottom: 2.5rem; opacity: 0; animation: fade-up 0.7s 0.8s forwards; }
+.hero-desc strong { color: var(--white); font-weight: 500; }
+.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fade-up 0.7s 1s forwards; }
+.btn-primary { padding: 0.75rem 1.75rem; background: var(--teal); color: var(--navy); border: none; border-radius: 6px; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-decoration: none; letter-spacing: 0.02em; transition: all 0.25s; box-shadow: 0 0 24px var(--teal-glow); }
+.btn-primary:hover { background: var(--teal2); transform: translateY(-2px); box-shadow: 0 0 40px var(--teal-glow); }
+.btn-secondary { padding: 0.75rem 1.75rem; background: transparent; color: var(--white); border: 1px solid var(--card-border); border-radius: 6px; font-weight: 500; font-size: 0.9rem; cursor: pointer; text-decoration: none; transition: all 0.25s; }
+.btn-secondary:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+.dl-icon { display: inline-block; animation: dl-bounce 1.6s ease-in-out infinite; }
+@keyframes dl-bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+.btn-secondary:hover .dl-icon, .contact-link:hover .dl-icon { animation: dl-bounce 0.6s ease-in-out infinite; }
+.hero-stats { display: flex; gap: 2.5rem; margin-top: 3rem; flex-wrap: wrap; opacity: 0; animation: fade-up 0.7s 1.2s forwards; }
+.stat-item .num { font-size: 2rem; font-weight: 800; color: var(--teal); line-height: 1; }
+.stat-item .lbl { font-size: 0.75rem; color: var(--gray); margin-top: 2px; letter-spacing: 0.05em; }
+.scroll-hint { position: absolute; bottom: 2rem; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; opacity: 0; animation: fade-up 0.7s 1.5s forwards; }
+.scroll-hint span { display: block; font-size: 0.7rem; color: var(--gray); letter-spacing: 0.1em; text-align: center; padding-left: 0.1em; }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--teal), transparent); animation: scroll-pulse 2s infinite; }
+@keyframes scroll-pulse { 0%,100%{opacity:0.4;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
+@keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+section { padding: 5rem 2rem; position: relative; z-index: 1; }
+.container { max-width: 1000px; margin: 0 auto; }
+.section-label { font-family: var(--mono); font-size: 0.75rem; color: var(--teal); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; }
+.section-title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 3rem; line-height: 1.2; }
+.section-title span { color: var(--teal); }
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; } .reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; } .reveal-delay-4 { transition-delay: 0.4s; }
+#about { background: var(--navy2); transition: background 0.3s ease; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.about-text p { color: var(--gray); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+.about-text p strong { color: var(--white); }
+.about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.tag { font-family: var(--mono); font-size: 0.72rem; padding: 0.3rem 0.8rem; border: 1px solid var(--teal-glow); border-radius: 20px; color: var(--teal); background: var(--teal-glow2); letter-spacing: 0.03em; }
+.about-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem; position: relative; overflow: hidden; }
+.about-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, transparent, var(--teal), transparent); }
+.about-card-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
+.about-card-item:last-child { margin-bottom: 0; }
+.aci-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+.aci-label { font-size: 0.72rem; color: var(--gray); letter-spacing: 0.05em; margin-bottom: 2px; }
+.aci-val { font-size: 0.9rem; font-weight: 500; color: var(--white); }
+#skills { background: var(--navy); transition: background 0.3s ease; }
+.skills-categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
+.skill-cat { background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden; }
+.skill-cat::after { content:''; position:absolute; inset:0; border-radius:14px; background: radial-gradient(circle at 50% 0%, var(--teal-glow), transparent 70%); opacity:0; transition: opacity 0.3s; }
+.skill-cat:hover { border-color: var(--teal-glow); transform: translateY(-4px); box-shadow: 0 8px 32px var(--teal-glow2); }
+.skill-cat:hover::after { opacity: 1; }
+.skill-cat-title { font-size: 0.72rem; color: var(--teal); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1rem; }
+.skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; position: relative; z-index:1; }
+.skill-pill { font-size: 0.78rem; padding: 0.25rem 0.65rem; border-radius: 5px; background: var(--pill-bg); color: var(--white); font-weight: 500; border: 1px solid var(--pill-border); transition: all 0.2s; }
+.skill-pill:hover { background: var(--teal-glow); border-color: var(--teal); color: var(--teal); }
+.skill-cat.highlight { border-color: var(--teal-glow); background: var(--teal-glow2); }
+#experience { background: var(--navy2); transition: background 0.3s ease; }
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before { content:''; position:absolute; left:0; top:8px; bottom:0; width:1px; background: linear-gradient(to bottom, var(--teal), var(--gray2), transparent); }
+.tl-item { position: relative; margin-bottom: 3rem; }
+.tl-dot { position: absolute; left: -2.43rem; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--navy); border: 2px solid var(--teal); box-shadow: 0 0 12px var(--teal-glow); }
+.tl-dot.current { background: var(--teal); animation: dot-pulse 2s infinite; }
+@keyframes dot-pulse { 0%,100%{box-shadow:0 0 0 0 var(--teal-glow)} 50%{box-shadow:0 0 0 8px rgba(0,0,0,0)} }
+.tl-period { font-family: var(--mono); font-size: 0.72rem; color: var(--teal); letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+.tl-role { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; }
+.tl-company { font-size: 0.9rem; color: var(--gray); margin-bottom: 1rem; }
+.tl-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.25rem 1.5rem; }
+.tl-bullets { list-style: none; }
+.tl-bullets li { font-size: 0.88rem; color: var(--gray); line-height: 1.7; padding-left: 1.2rem; position: relative; margin-bottom: 0.5rem; }
+.tl-bullets li::before { content:'▸'; position:absolute; left:0; color: var(--teal); font-size: 0.75rem; top: 2px; }
+.tl-bullets li strong { color: var(--white); font-weight: 500; }
+.tl-award { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.75rem; font-size: 0.75rem; color: var(--teal); background: var(--teal-glow2); border: 1px solid var(--teal-glow); border-radius: 20px; padding: 0.3rem 0.75rem; }
+#projects { background: var(--navy); transition: background 0.3s ease; }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; }
+.proj-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+.proj-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, transparent, var(--teal), transparent); transform: scaleX(0); transition: transform 0.4s; }
+.proj-card:hover { border-color: var(--teal-glow); transform: translateY(-5px); box-shadow: 0 12px 40px var(--teal-glow2); }
+.proj-card:hover::before { transform: scaleX(1); }
+.proj-card.featured { border-color: var(--teal-glow); background: var(--teal-glow2); }
+.proj-num { font-family: var(--mono); font-size: 0.7rem; color: var(--gray2); letter-spacing: 0.05em; margin-bottom: 0.6rem; }
+.proj-badge { font-family: var(--mono); font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 20px; border: 1px solid var(--teal); color: var(--teal); display: inline-block; margin-bottom: 1rem; margin-left: 0.5rem; letter-spacing: 0.08em; }
+.proj-badge.active { background: var(--teal); color: var(--navy); }
+.proj-badge.closed { border-color: var(--gray2); color: var(--gray); }
+.proj-top { display: flex; align-items: center; flex-wrap: wrap; }
+.proj-name { font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+.proj-period { font-family: var(--mono); font-size: 0.7rem; color: var(--gray); margin-bottom: 0.75rem; }
+.proj-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.7; flex: 1; margin-bottom: 1rem; }
+.proj-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1rem; }
+.proj-tech { font-size: 0.7rem; padding: 0.2rem 0.55rem; border-radius: 4px; background: var(--pill-bg); color: var(--gray); border: 1px solid var(--pill-border); }
+.proj-link { font-family: var(--mono); font-size: 0.75rem; color: var(--teal); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; transition: gap 0.2s; }
+.proj-link:hover { gap: 0.5rem; }
+#achievements { background: var(--navy2); transition: background 0.3s ease; }
+.ach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+.ach-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.5rem; transition: all 0.3s; }
+.ach-card:hover { border-color: var(--teal-glow); transform: translateY(-3px); }
+.ach-icon { font-size: 2rem; margin-bottom: 1rem; }
+.ach-title { font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
+.ach-sub { font-size: 0.8rem; color: var(--gray); line-height: 1.65; }
+#certifications { background: var(--navy); transition: background 0.3s ease; }
+.cert-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.cert-item { background: var(--card); border: 1px solid var(--card-border); border-radius: 10px; padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; flex-wrap: wrap; gap: 0.5rem; }
+.cert-item:hover { border-color: var(--teal-glow); }
+.cert-name { font-size: 0.9rem; font-weight: 500; color: var(--white); }
+.cert-issuer { font-size: 0.78rem; color: var(--gray); margin-top: 2px; }
+.cert-score { font-family: var(--mono); font-size: 0.78rem; color: var(--teal); white-space: nowrap; }
+#contact { background: var(--navy2); text-align: center; transition: background 0.3s ease; }
+.contact-tagline { font-size: 1rem; color: var(--gray); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.7; }
+.contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+.contact-link { display: flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem; border-radius: 8px; border: 1px solid var(--card-border); background: var(--card); color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: all 0.25s; }
+.contact-link:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+footer { text-align: center; padding: 2rem; border-top: 1px solid var(--card-border); font-size: 0.78rem; color: var(--gray); font-family: var(--mono); }
+footer span { color: var(--teal); }
+@media (max-width: 768px) {
+  nav { padding: 1rem; } .nav-links { gap: 0.75rem; } .nav-links a:not(#theme-toggle) { font-size: 0.75rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; } .hero-stats { gap: 1.5rem; } section { padding: 4rem 1.25rem; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-logo">sreenivas.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><button id="theme-toggle" onclick="toggleTheme()"><span id="theme-icon">☀</span><span id="theme-label">Light</span></button></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg-circles"><span></span><span></span><span></span></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">👋 &nbsp;Available for new opportunities</p>
+    <h1 class="hero-name">Sree Nivas <span class="accent">J</span></h1>
+    <p class="hero-title"><span class="typed-wrap" id="typed"></span><span class="cursor"></span></p>
+    <p class="hero-desc">
+      Full Stack Developer with <strong>5+ years</strong> building scalable SaaS platforms for compliance automation. Specialising in <strong>React.js, Laravel</strong> and <strong>AI-assisted development</strong> using Claude Code AI. Based in <strong>Madurai, India</strong>.
+    </p>
+    <ul style="list-style:none; margin-bottom:2.5rem; opacity:0; animation: fade-up 0.7s 0.9s forwards;">
+      <li style="font-size:0.9rem; color:var(--gray); padding-left:1.2rem; position:relative; margin-bottom:0.6rem;"><span style="position:absolute; left:0; color:var(--teal);">▸</span>Architected end-to-end SaaS solutions serving <strong style="color:var(--white); font-weight:500;">300+ employees</strong> in production compliance systems.</li>
+      <li style="font-size:0.9rem; color:var(--gray); padding-left:1.2rem; position:relative; margin-bottom:0.6rem;"><span style="position:absolute; left:0; color:var(--teal);">▸</span>Cut release cycle time by <strong style="color:var(--white); font-weight:500;">40%</strong> through CI/CD pipelines built with Jenkins and SonarQube.</li>
+      <li style="font-size:0.9rem; color:var(--gray); padding-left:1.2rem; position:relative; margin-bottom:0.6rem;"><span style="position:absolute; left:0; color:var(--teal);">▸</span>Built <strong style="color:var(--white); font-weight:500;">10+ shipped projects</strong> spanning React.js, Laravel, Next.js, and React Native.</li>
+      <li style="font-size:0.9rem; color:var(--gray); padding-left:1.2rem; position:relative; margin-bottom:0.6rem;"><span style="position:absolute; left:0; color:var(--teal);">▸</span>Early adopter of <strong style="color:var(--white); font-weight:500;">Claude Code AI</strong> in production development workflows.</li>
+    </ul>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="SreeNivas_J_Resume.pdf" class="btn-secondary" download><span class="dl-icon">⬇</span> Download Resume</a>
+      <a href="mailto:sreenivasj14@gmail.com" class="btn-secondary">Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="num" data-target="5">0</div><div class="lbl">Years Experience</div></div>
+      <div class="stat-item"><div class="num" data-target="10">0</div><div class="lbl">Projects Shipped</div></div>
+      <div class="stat-item"><div class="num" data-target="300">0</div><div class="lbl">Users Impacted</div></div>
+      <div class="stat-item"><div class="num" data-target="40">0</div><div class="lbl">% Faster Releases</div></div>
+    </div>
+  </div>
+
+</section>
+
+<section id="about">
+  <div class="container">
+    <p class="section-label reveal">About me</p>
+    <h2 class="section-title reveal">Crafting web experiences <span>that matter</span></h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a <strong>Senior Software Engineer</strong> at Aparajitha Software Services, Madurai, where I build compliance automation SaaS applications used by thousands across India.</p>
+        <p>My work spans the full stack — from React.js frontends optimised for speed and usability, to Laravel backends powering complex PF, ESI, and payroll workflows. I recently integrated <strong>Claude Code AI</strong> into my development workflow to ship features faster and smarter.</p>
+        <p>I hold an <strong>MCA from Madurai Kamaraj University</strong>, completed alongside full-time work — a commitment to staying sharp and growing technically.</p>
+        <div class="about-tags">
+          <span class="tag">React.js</span><span class="tag">Laravel</span><span class="tag">PHP</span>
+          <span class="tag">MySQL</span><span class="tag">CI/CD</span><span class="tag">Agile</span>
+          <span class="tag">Claude Code AI</span><span class="tag">SSE</span>
+        </div>
+      </div>
+      <div class="about-card reveal reveal-delay-2">
+        <div class="about-card-item">
+          <div class="aci-icon">🎓</div>
+          <div>
+            <div class="aci-label">EDUCATION</div>
+            <div class="aci-val">MCA · Madurai Kamaraj University</div>
+            <div class="aci-val" style="font-size:0.8rem;color:var(--gray)">CGPA 7.0 · Jul 2023 – Jun 2025</div>
+            <div class="aci-val" style="font-size:0.8rem;color:var(--gray);margin-top:0.4rem">BCA · Thiagarajar College · CGPA 9.28 · Jun 2018 – May 2021</div>
+          </div>
+        </div>
+        <div class="about-card-item">
+          <div class="aci-icon">🏢</div>
+          <div>
+            <div class="aci-label">CURRENT COMPANY</div>
+            <div class="aci-val">Aparajitha Software Services Pvt Ltd</div>
+            <div class="aci-val" style="font-size:0.8rem;color:var(--gray)">Senior Software Engineer · Jun 2022–Present</div>
+          </div>
+        </div>
+        <div class="about-card-item">
+          <div class="aci-icon">📍</div>
+          <div><div class="aci-label">LOCATION</div><div class="aci-val">Madurai, Tamil Nadu, India</div></div>
+        </div>
+        <div class="about-card-item">
+          <div class="aci-icon">🌐</div>
+          <div><div class="aci-label">LANGUAGES</div><div class="aci-val">English · Tamil</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <p class="section-label reveal">What I work with</p>
+    <h2 class="section-title reveal">Technical <span>skills</span></h2>
+    <div class="skills-categories">
+      <div class="skill-cat highlight reveal reveal-delay-1">
+        <div class="skill-cat-title">⚛ Frontend</div>
+        <div class="skill-pills">
+          <span class="skill-pill">React.js</span><span class="skill-pill">Next.js</span>
+          <span class="skill-pill">React Native</span><span class="skill-pill">JavaScript ES6+</span>
+          <span class="skill-pill">HTML5</span><span class="skill-pill">CSS3</span>
+          <span class="skill-pill">Bootstrap</span><span class="skill-pill">jQuery</span><span class="skill-pill">Redux</span>
+        </div>
+      </div>
+      <div class="skill-cat reveal reveal-delay-2">
+        <div class="skill-cat-title">⚙ Backend</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Laravel</span><span class="skill-pill">PHP</span>
+          <span class="skill-pill">Node.js</span><span class="skill-pill">RESTful APIs</span>
+          <span class="skill-pill">SSE</span><span class="skill-pill">Java</span>
+        </div>
+      </div>
+      <div class="skill-cat reveal reveal-delay-3">
+        <div class="skill-cat-title">🗄 Database</div>
+        <div class="skill-pills"><span class="skill-pill">MySQL</span><span class="skill-pill">MongoDB</span><span class="skill-pill">Query Optimization</span></div>
+      </div>
+      <div class="skill-cat reveal reveal-delay-4">
+        <div class="skill-cat-title">🛠 DevOps & Tools</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Jenkins</span><span class="skill-pill">SonarQube</span>
+          <span class="skill-pill">Git / GitHub</span><span class="skill-pill">CI/CD</span>
+          <span class="skill-pill">Webpack</span><span class="skill-pill">Leaflet API</span><span class="skill-pill">Claude Code AI</span>
+        </div>
+      </div>
+      <div class="skill-cat reveal reveal-delay-1">
+        <div class="skill-cat-title">📋 Practices</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Agile / Scrum</span><span class="skill-pill">Code Review</span>
+          <span class="skill-pill">Unit Testing</span><span class="skill-pill">Responsive Design</span>
+          <span class="skill-pill">RPA Integration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <p class="section-label reveal">Where I've worked</p>
+    <h2 class="section-title reveal">Work <span>experience</span></h2>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot current"></div>
+        <div class="tl-period">Jun 2022 – Present</div>
+        <div class="tl-role">Senior Software Engineer</div>
+        <div class="tl-company">Aparajitha Software Services Pvt Ltd · Madurai</div>
+        <div class="tl-card">
+          <ul class="tl-bullets">
+            <li>Architected end-to-end <strong>full-stack SaaS solutions</strong> using React.js, Laravel, PHP, MySQL, SonarQube, and Jenkins across multiple compliance projects.</li>
+            <li>Built and maintained <strong>20+ reusable React components</strong> with hooks-based state management, reducing unnecessary re-renders by 30%.</li>
+            <li>Implemented <strong>CI/CD pipelines with Jenkins</strong>, automating build, test, and deployment — cutting release cycle time by 40%.</li>
+            <li>Integrated <strong>SonarQube</strong> for continuous code quality inspection, resolving code smells, bugs, and security vulnerabilities across 3 projects.</li>
+            <li>Created <strong>custom RESTful APIs for RPA bot integration</strong>, automating PF & ESI workflows for 300+ employees.</li>
+            <li>Led the <strong>Aparajitha Helpdesk project (Mar 2026–Present)</strong> — a PF & ESI client support app, built using Claude Code AI to accelerate development.</li>
+            <li>Collaborated with UX/UI designers, QA engineers, and PMs in <strong>Agile/Scrum sprints</strong>, conducting code reviews and maintaining code quality.</li>
+          </ul>
+          <div class="tl-award">🏆 Appreciation Award — Simpliance Remit, March 2023</div>
+        </div>
+      </div>
+      <div class="tl-item reveal reveal-delay-2">
+        <div class="tl-dot"></div>
+        <div class="tl-period">Mar 2021 – Jun 2022</div>
+        <div class="tl-role">React & Frontend Developer</div>
+        <div class="tl-company">Complyindia Tech Services Pvt Ltd · Bangalore</div>
+        <div class="tl-card">
+          <ul class="tl-bullets">
+            <li>Developed <strong>15+ modular reusable React components</strong>, reducing UI development time by 25%.</li>
+            <li>Implemented React Hooks state management, reducing re-renders by <strong>35%</strong> and improving responsiveness.</li>
+            <li>Applied code-splitting and virtual DOM optimisation, improving portal load speed by <strong>30%</strong>.</li>
+            <li>Ensured <strong>cross-browser, cross-device compatibility</strong> using CSS media queries across Chrome, Firefox, Safari, and Edge.</li>
+            <li>Optimised RESTful API calls and data fetching with backend developers, improving user experience and response times.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <p class="section-label reveal">What I've built</p>
+    <h2 class="section-title reveal">Featured <span>projects</span></h2>
+    <p style="font-size:0.82rem;color:var(--gray);margin-top:-2rem;margin-bottom:2rem;">Most recent work first</p>
+    <div class="projects-grid">
+
+      <div class="proj-card featured reveal reveal-delay-1">
+        <div class="proj-num">01</div>
+        <div class="proj-top"><span class="proj-badge active">● Active</span></div>
+        <div class="proj-name">Aparajitha Helpdesk</div>
+        <div class="proj-period">Mar 2026 – Present · Aparajitha (Active)</div>
+        <p class="proj-desc">A dedicated PF & ESI client support platform with role-based dashboards, automated ticket routing, and email notifications — built with Claude Code AI to accelerate delivery.</p>
+        <div class="proj-stack"><span class="proj-tech">React.js</span><span class="proj-tech">Laravel</span><span class="proj-tech">Claude Code AI</span></div>
+      </div>
+
+      <div class="proj-card featured reveal reveal-delay-2">
+        <div class="proj-num">02</div>
+        <div class="proj-name">Simpliance Remit</div>
+        <div class="proj-period">Oct 2022 – Feb 2026 · Aparajitha (Completed)</div>
+        <p class="proj-desc">End-to-end SaaS automation for PF & ESI compliance calculation, reducing manual errors for 300+ employees. Used SSE for real-time progress updates on long-running payroll jobs and integrated RPA bot APIs for data processing.</p>
+        <div class="proj-stack"><span class="proj-tech">JavaScript</span><span class="proj-tech">Laravel</span><span class="proj-tech">SSE</span><span class="proj-tech">RPA</span></div>
+        <a href="https://remit.simpliance.in/login" class="proj-link" target="_blank">View live →</a>
+      </div>
+
+      <div class="proj-card reveal reveal-delay-3">
+        <div class="proj-num">03</div>
+        <div class="proj-name">Expense Tracker</div>
+        <div class="proj-period">Personal</div>
+        <p class="proj-desc">A cross-platform mobile app for logging daily expenses, categorising spending, and visualising monthly trends through simple, at-a-glance charts.</p>
+        <div class="proj-stack"><span class="proj-tech">React Native</span><span class="proj-tech">Next.js</span></div>
+      </div>
+
+      <div class="proj-card reveal reveal-delay-4">
+        <div class="proj-num">04</div>
+        <div class="proj-name">Courier Connect</div>
+        <div class="proj-period">PG Project</div>
+        <p class="proj-desc">A courier management and real-time tracking system that plots live shipment locations on an interactive map, built with the Leaflet API on a Next.js frontend.</p>
+        <div class="proj-stack"><span class="proj-tech">Next.js</span><span class="proj-tech">Leaflet API</span></div>
+      </div>
+
+      <div class="proj-card reveal reveal-delay-1">
+        <div class="proj-num">05</div>
+        <div class="proj-name">Library Management System</div>
+        <div class="proj-period">Jul 2024 – Aug 2024 · Personal</div>
+        <p class="proj-desc">A role-based library system with admin and user dashboards for managing books, categories, issue requests, approvals, return tracking, and real-time search/filter.</p>
+        <div class="proj-stack"><span class="proj-tech">React.js</span><span class="proj-tech">Laravel</span></div>
+      </div>
+
+      <div class="proj-card reveal reveal-delay-2">
+        <div class="proj-num">06</div>
+        <div class="proj-name">User & Timetable Management</div>
+        <div class="proj-period">Personal</div>
+        <p class="proj-desc">A scheduling tool for managing user roles alongside class timetables, with clash detection and an editable, calendar-style view for administrators.</p>
+        <div class="proj-stack"><span class="proj-tech">React.js</span><span class="proj-tech">Laravel</span></div>
+      </div>
+
+      <div class="proj-card reveal reveal-delay-3">
+        <div class="proj-num">07</div>
+        <div class="proj-name">Timer-Based Quiz Application</div>
+        <div class="proj-period">Oct 2022 – Jan 2023 · Personal</div>
+        <p class="proj-desc">A cross-platform, timer-driven quiz app with live scoring, result tracking, an admin panel, and secure social login via Google, Facebook, and GitHub.</p>
+        <div class="proj-stack"><span class="proj-tech">React.js</span><span class="proj-tech">Laravel</span></div>
+        <a href="https://sreenivas14.github.io/React_quiz_application_with_backend/" class="proj-link" target="_blank">View live →</a>
+      </div>
+
+      <div class="proj-card reveal reveal-delay-4">
+        <div class="proj-num">08</div>
+        <div class="proj-name">Weather Application</div>
+        <div class="proj-period">Mar 2023 – Apr 2023 · Personal</div>
+        <p class="proj-desc">A real-time weather app with geolocation detection, city search, and live data pulled from the OpenWeatherMap API, wrapped in a lightweight Laravel-backed service layer.</p>
+        <div class="proj-stack"><span class="proj-tech">React.js</span><span class="proj-tech">Laravel</span></div>
+        <a href="https://sree-nivas14.github.io/Weather_app/" class="proj-link" target="_blank">View live →</a>
+      </div>
+
+      <div class="proj-card reveal reveal-delay-1">
+        <div class="proj-num">09</div>
+        <div class="proj-name">Complyindia Compliance Platform</div>
+        <div class="proj-period">Complyindia Tech Services · Completed</div>
+        <p class="proj-desc">Contributed reusable, hook-driven React interfaces for a regulatory compliance platform, focused on performance and cross-browser consistency for enterprise users.</p>
+        <div class="proj-stack"><span class="proj-tech">React.js</span></div>
+      </div>
+
+      <div class="proj-card reveal reveal-delay-2">
+        <div class="proj-num">10</div>
+        <div class="proj-name">College Attendance Portal Online</div>
+        <div class="proj-period">UG Project</div>
+        <p class="proj-desc">A web-based attendance system built to replace manual registers, giving faculty a searchable digital record and students a self-service view of their attendance status.</p>
+        <div class="proj-stack"><span class="proj-tech">PHP</span><span class="proj-tech">HTML</span><span class="proj-tech">CSS</span><span class="proj-tech">Bootstrap</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="container">
+    <p class="section-label reveal">Recognition</p>
+    <h2 class="section-title reveal">Achievements & <span>Awards</span></h2>
+    <div class="ach-grid">
+      <div class="ach-card reveal reveal-delay-1">
+        <div class="ach-icon">🏆</div>
+        <div class="ach-title">Appreciation Award — Simpliance Remit</div>
+        <div class="ach-sub">Recognised by Aparajitha Software Services (March 2023) for delivering a critical compliance module under tight deadlines, significantly reducing workload for 300+ employees and increasing operational efficiency.</div>
+      </div>
+      <div class="ach-card reveal reveal-delay-2">
+        <div class="ach-icon">🤖</div>
+        <div class="ach-title">AI-Assisted Development Pioneer</div>
+        <div class="ach-sub">Early adopter of Claude Code AI in production development workflow for Aparajitha Helpdesk — accelerating feature delivery and improving code quality through AI pair-programming.</div>
+      </div>
+      <div class="ach-card reveal reveal-delay-3">
+        <div class="ach-icon">⚡</div>
+        <div class="ach-title">40% Faster Release Cycles</div>
+        <div class="ach-sub">Designed and implemented a CI/CD pipeline using Jenkins that automated build, test, and deployment — cutting release time by 40% and eliminating manual deployment errors.</div>
+      </div>
+      <div class="ach-card reveal reveal-delay-4">
+        <div class="ach-icon">📊</div>
+        <div class="ach-title">Java Programming — NPTEL SWAYAM</div>
+        <div class="ach-sub">Scored 78% in NPTEL's nationally recognised Programming in Java course (Sep–Dec 2020). Also completed Java Programming with SSI Education scoring above 90%.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="container">
+    <p class="section-label reveal">Learning & growth</p>
+    <h2 class="section-title reveal">Certifications</h2>
+    <div class="cert-list">
+      <div class="cert-item reveal">
+        <div><div class="cert-name">React JS</div><div class="cert-issuer">LearnCodeOnline.in · Aug – Nov 2022</div></div>
+        <div class="cert-score">Completed ✓</div>
+      </div>
+      <div class="cert-item reveal reveal-delay-1">
+        <div><div class="cert-name">Programming in Java</div><div class="cert-issuer">NPTEL SWAYAM · Sep – Dec 2020</div></div>
+        <div class="cert-score">78%</div>
+      </div>
+      <div class="cert-item reveal reveal-delay-2">
+        <div><div class="cert-name">Java Programming</div><div class="cert-issuer">SSI Education · Feb – Apr 2019</div></div>
+        <div class="cert-score">Above 90%</div>
+      </div>
+      <div class="cert-item reveal reveal-delay-3">
+        <div><div class="cert-name">Enhancing Soft Skills & Personality</div><div class="cert-issuer">NPTEL SWAYAM · Aug – Nov 2019</div></div>
+        <div class="cert-score">83%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <p class="section-label reveal">Let's connect</p>
+    <h2 class="section-title reveal">Open to <span>opportunities</span></h2>
+    <p class="contact-tagline reveal">I'm actively looking for senior full-stack or React.js roles. Let's talk.</p>
+    <div class="contact-links reveal">
+      <a href="SreeNivas_J_Resume.pdf" class="contact-link" download><span class="link-icon dl-icon">⬇</span> Download Resume</a>
+      <a href="mailto:sreenivasj14@gmail.com" class="contact-link"><span class="link-icon">✉</span> sreenivasj14@gmail.com</a>
+      <a href="tel:+916385578231" class="contact-link"><span class="link-icon">📱</span> +91 63855 78231</a>
+      <a href="https://linkedin.com/in/sree-nivas-j-b35175219" class="contact-link" target="_blank"><span class="link-icon">💼</span> LinkedIn</a>
+      <a href="https://github.com/sreenivas14" class="contact-link" target="_blank"><span class="link-icon">🐙</span> GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer><p>Built with ❤ by <span>Sree Nivas J</span> · Madurai, India · 2026</p></footer>
+
+<script>
+const phrases = ['Senior Software Engineer','React.js Developer','Laravel Full Stack Dev','AI-Assisted Builder','SaaS Platform Engineer'];
+let pi = 0, ci = 0, deleting = false;
+const el = document.getElementById('typed');
+function type() {
+  const phrase = phrases[pi];
+  if (!deleting) { el.textContent = phrase.slice(0, ci + 1); ci++; if (ci === phrase.length) { deleting = true; setTimeout(type, 1800); return; } }
+  else { el.textContent = phrase.slice(0, ci - 1); ci--; if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; } }
+  setTimeout(type, deleting ? 45 : 85);
+}
+setTimeout(type, 1200);
+
+const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } }); }, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+function animateCounter(el, target) {
+  let current = 0; const step = target / 50;
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) { el.textContent = target + '+'; clearInterval(timer); return; }
+    el.textContent = Math.floor(current) + '+';
+  }, 30);
+}
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { document.querySelectorAll('[data-target]').forEach(el => { animateCounter(el, parseInt(el.dataset.target)); }); statsObserver.disconnect(); } });
+}, { threshold: 0.5 });
+const statsEl = document.querySelector('.hero-stats');
+if (statsEl) statsObserver.observe(statsEl);
+
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+function toggleTheme() {
+  const body = document.body;
+  const isLight = body.classList.toggle('light-theme');
+  document.getElementById('theme-icon').textContent = isLight ? '🌙' : '☀';
+  document.getElementById('theme-label').textContent = isLight ? 'Dark' : 'Light';
+}
+</script>
+</body>
+</html>
